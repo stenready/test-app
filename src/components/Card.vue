@@ -17,7 +17,7 @@
           </v-chip>
           <v-card-text class="text">
             <div>
-              {{getDescription.desc}}
+              <div v-html="getDescription.desc"></div>
               <router-link class="link" :to="`/single/${movie.id}`" v-if="getDescription.showMore">
                 Докладніше
               </router-link>

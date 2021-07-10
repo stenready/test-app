@@ -30,5 +30,16 @@ export default {
           reject(error)
         })
     } )
-  }
+  },
+  getMovieSessions(id) {
+    return new Promise( (resolve, reject) => {
+      $http.get(`/movieShows?movie_id=${id}`)
+        .then((res) => {
+          resolve(res.data.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    } )
+  },
 }

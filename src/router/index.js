@@ -8,6 +8,11 @@ const routes = [
     name: 'Home',
     component: () => import('../views/Home'),
   },
+  {
+    path: '/single/:id',
+    name: 'Single',
+    component: () => import('../views/SingleMovie'),
+  },
 ]
 
 const router = new VueRouter({
