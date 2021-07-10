@@ -7,8 +7,8 @@ export default {
   getMovies() {
     return new Promise( (resolve, reject) => {
       $http.get('/movies')
-        .then((data) => {
-          resolve(data)
+        .then((res) => {
+          resolve(res.data.data)
         })
         .catch(error => {
           reject(error)
