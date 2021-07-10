@@ -14,5 +14,21 @@ export default {
           reject(error)
         })
     } )
+  },
+  findMovieByPayload(id, name, genres = null) {
+    return new Promise( (resolve, reject) => {
+      let link = ['/movies?']
+      if (id) link.push(`movie_id=${id}&`)
+      if (name) link.push(`name=${name}&`)
+      if (genres || genres === 0) link.push(`genres=${genres}`) //на бэке ге корректго отрабатывает
+      link = link.join('')
+      $http.get(link)
+        .then((res) => {
+          resolve(res.data.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    } )
   }
 }
