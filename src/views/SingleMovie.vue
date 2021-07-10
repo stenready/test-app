@@ -27,19 +27,29 @@
         </v-col>
       </v-row>
     </v-container>
+    <Dialog v-if="dialog"/>
   </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex';
+import {mapMutations, mapState} from 'vuex';
+import Dialog from "../components/Dialog";
 export default {
   name: "SingleMovie",
+  components: {
+    Dialog,
+  },
   data() {
     return {
       movie: [],
       sessions: [],
       selection: null,
     }
+  },
+  computed: {
+    ...mapState({
+      dialog: state => state.dialog,
+    })
   },
   watch: {
     selection(value) {

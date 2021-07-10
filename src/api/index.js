@@ -42,4 +42,16 @@ export default {
         })
     } )
   },
+  showPlaces(id, time, date) {
+    return new Promise( (resolve, reject) => {
+      $http.get(`/showPlaces?movie_id=${id}&daytime=${time}&showdate=${date}`)
+        .then((res) => {
+          resolve(res.data.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    } )
+  },
+
 }

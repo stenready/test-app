@@ -27,7 +27,12 @@
 
 <script>
 export default {
-  name: "Dialog"
+  name: "Dialog",
+  async mounted() {
+    const date = this.$store.state.selectedDate.split(' ')
+    const response = await this.$api.showPlaces(+this.$route.params.id, date[1], date[0])
+    console.log(response, 'response')
+  }
 }
 </script>
 
