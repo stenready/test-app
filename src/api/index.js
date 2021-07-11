@@ -53,5 +53,22 @@ export default {
         })
     } )
   },
+  bookPlace(id, row, seat, time, date) {
+    return new Promise( (resolve, reject) => {
+      $http.post(`/bookPlace`, {
+        movie_id: id,
+        row,
+        seat,
+        'Showdate': date,
+        daytime: time,
+      })
+        .then((res) => {
+          resolve(res.data.data)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    } )
+  },
 
 }

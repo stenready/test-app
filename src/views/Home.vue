@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page">
+  <div class="home-page"  data-vue-component-name="Home">
     <v-container>
       <filtered @filtered="filterHandler" />
       <v-row class="mt-2">
@@ -12,13 +12,11 @@
 </template>
 
 <script>
-import Card from "../components/Card";
-import Filtered from "../components/Filtered";
   export default {
     name: 'Home',
     components: {
-      Card,
-      Filtered
+      Card: () => import('../components/Card'),
+      Filtered: () => import('../components/Filtered'),
     },
     data() {
       return {
@@ -27,7 +25,6 @@ import Filtered from "../components/Filtered";
     },
     methods: {
       async filterHandler(payload) {
-        console.log(payload)
         if (payload === 'clear') {
           this.movies = await this.$api.getMovies();
           return;
@@ -36,7 +33,7 @@ import Filtered from "../components/Filtered";
       }
     },
     async  mounted() {
-      this.movies = await this.$api.getMovies()
+      this.movies = await this.$api.getMovies();
     }
   }
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <div class="single-movie" v-if="movie" :style="{ 'background-image': 'url(' + movie.image + ')' }">
+  <div class="single-movie"
+       data-vue-component-name="SingleMovie"
+       v-if="movie"
+       :style="{ 'background-image': 'url(' + movie.image + ')' }">
     <v-container>
       <v-row>
         <v-col cols="7" class="centered">
@@ -27,17 +30,18 @@
         </v-col>
       </v-row>
     </v-container>
-    <Dialog v-if="dialog"/>
+    <FindPlaceDialog @selectedRemove="selection = null" :name="movie.name" v-if="dialog"/>
+
   </div>
 </template>
 
 <script>
 import {mapMutations, mapState} from 'vuex';
-import Dialog from "../components/Dialog";
+import FindPlaceDialog from "../components/FindPlaceDialog";
 export default {
   name: "SingleMovie",
   components: {
-    Dialog,
+    FindPlaceDialog,
   },
   data() {
     return {
@@ -53,16 +57,16 @@ export default {
   },
   watch: {
     selection(value) {
-      this.SET_SELECTED_DATE(value)
+      this.SET_SELECTED_DATE(value);
     },
   },
   methods: {
     ...mapMutations(['SET_SELECTED_DATE']),
     async init() {
       const id = +this.$route.params.id;
-      const singleMovie = await this.$api.findMovieByPayload(id, null, null)
+      const singleMovie = await this.$api.findMovieByPayload(id, null, null);
       this.movie = singleMovie[0];
-      const response = await this.$api.getMovieSessions(id)
+      const response = await this.$api.getMovieSessions(id);
       this.sessions = response[id].map(el => {
         return {
           ...el,
@@ -71,23 +75,23 @@ export default {
       });
     },
     isActiveChip(session, time) {
-      const lTime = `${session.showdate} ${time}`
-      return this.selection === lTime ? 'active' : ''
+      const lTime = `${session.showdate} ${time}`;
+      return this.selection === lTime ? 'active' : '';
     },
     getSessionTimes(session) {
-      return session.daytime.split(';')
+      return session.daytime.split(';');
     },
     sessionsHandler(date, time){
-      const lTime = `${date} ${time}`
+      const lTime = `${date} ${time}`;
       if ( this.selection === lTime) {
-        this.selection = ''
-        return false
+        this.selection = '';
+        return false;
       }
-      this.selection = lTime
+      this.selection = lTime;
     },
   },
   async mounted() {
-    await this.init()
+    await this.init();
   }
 }
 </script>

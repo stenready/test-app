@@ -1,24 +1,30 @@
 <template>
-  <v-app>
+  <v-app  data-vue-component-name="App">
     <v-main>
       <Navbar />
       <router-view/>
-
+      <ResultDialog v-if="isShowResultDialog" />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import Navbar from "./components/Navbar";
 export default {
   name: 'App',
   components: {
-    Navbar,
+    Navbar: () => import('./components/Navbar'),
+    ResultDialog: () => import('./components/ResultDialog'),
   },
-  data() {
-    return {
-      dialog: true
-    }
+  computed: {
+    isShowResultDialog() {
+      return this.$store.state.selectedPlace;
+    },
   },
 };
 </script>
+
+<style>
+a{
+  text-decoration: none;
+}
+</style>

@@ -45,13 +45,13 @@ export default {
   props: {
     movie: {
       required: true,
-      type: Object
+      type: Object,
     }
   },
   computed: {
     getGenres,
     getDescription() {
-      const minLength = this.movie.description.length <= 200
+      const minLength = this.movie.description.length <= 200;
       return {
         desc: minLength ? this.movie.description : this.movie.description.slice(0, 200),
         showMore: !minLength

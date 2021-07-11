@@ -1,6 +1,8 @@
 <template>
   <v-app-bar color="deep-purple darken-3 st-app-bar" data-vue-component-name="Navbar">
-    <v-toolbar-title>DneprCinema</v-toolbar-title>
+    <router-link to="/">
+      <v-toolbar-title class="logo">DneprCinema</v-toolbar-title>
+    </router-link>
     <v-spacer></v-spacer>
     <v-btn
         v-if="selectedDate"
@@ -30,8 +32,10 @@ export default {
 
 <style lang="scss">
 .st-app-bar{
+  .logo{
+    cursor: pointer;
+  }
   .v-toolbar__content{
-    //justify-content: center;
     .v-toolbar__title{
       color: white;
     }

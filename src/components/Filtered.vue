@@ -1,5 +1,5 @@
 <template>
-  <v-card class="elevation-24 filtered-card">
+  <v-card class="elevation-24 filtered-card"  data-vue-component-name="Filtered">
     <v-row>
       <v-col cols="6">
         <v-text-field v-model="searchByName" label="Пошук фільму за назвою"></v-text-field>
@@ -51,31 +51,31 @@ export default {
   computed: {
     getGenres,
     isShowClearButton() {
-      return this.searchByName || this.selected
+      return this.searchByName || this.selected;
     },
     isFilterCleared() {
-      return !this.searchByName && !this.selected
+      return !this.searchByName && !this.selected;
     }
   },
   watch: {
     selected() {
-      this.emitFilterEvent()
+      this.emitFilterEvent();
     },
     searchByName() {
-      this.emitFilterEvent()
+      this.emitFilterEvent();
     },
   },
   methods: {
     clearFilters() {
-      this.selected = null
-      this.searchByName = ''
+      this.selected = null;
+      this.searchByName = '';
     },
     emitFilterEvent() {
       if (this.isFilterCleared) {
-        this.$emit('filtered', 'clear')
+        this.$emit('filtered', 'clear');
       } else {
-        let selectValue = this.getGenres.findIndex(el => el === this.selected)
-        if (selectValue === -1) selectValue = null
+        let selectValue = this.getGenres.findIndex(el => el === this.selected);
+        if (selectValue === -1) selectValue = null;
         this.$emit('filtered', {
           searchByName: this.searchByName,
           selected: selectValue
@@ -84,7 +84,7 @@ export default {
     },
     close() {
       this.$refs.select.blur();
-      this.selected = null
+      this.selected = null;
     }
   }
 
